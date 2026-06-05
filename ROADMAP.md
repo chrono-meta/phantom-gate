@@ -6,7 +6,7 @@ Status: **Released**
 
 ### Features
 - ✅ M1~M4 baseline detectors (regex-based, zero LLM cost)
-- ✅ M5 stub (multi-file analysis placeholder)
+- ✅ M5 full implementation (multi-file Python version contradiction)
 - ✅ DetectionEngine with 2-pass architecture
 - ✅ CLI: `phantom-gate scan`
 - ✅ Pydantic data models (Finding, Evidence, Severity)
@@ -20,20 +20,18 @@ Status: **Released**
 
 ---
 
-## Phase 1 (v0.2.0 — In Progress)
+## Phase 1 (v0.2.0 — Released 2026-06-05)
 
-Status: **In Progress**
+Status: **Released**
 
 ### Done
 - ✅ **M5 implementation**: Python version contradiction across project files
 - ✅ **ProjectContext**: `load_project()` + `scan_project()` API
 - ✅ **Scope-aware DetectionEngine**: file vs. project detector routing
-
-### Remaining
-- [ ] **CLI expansion**: `label`, `report`, `calibrate` commands
-- [ ] **CI/CD**: GitHub Actions with Python 3.10~3.13 matrix
-- [ ] **Pytest fixtures**: Expand test coverage to 90%+
-- [ ] **Feedback loop**: TP/FP labeling API for detector tuning
+- ✅ **CLI expansion**: `label`, `report`, `calibrate` commands
+- ✅ **CI/CD**: GitHub Actions with Python 3.10~3.13 matrix
+- ✅ **Test coverage**: 110 tests, 93% coverage (target 90%+ met)
+- ✅ **Feedback loop**: TP/FP labeling + detector calibration
 
 ---
 
@@ -69,7 +67,7 @@ Status: **In Progress**
 
 | Version | Date | Highlights |
 |---|---|---|
-| 0.2.0 | 2026-06-05 | Phase 1 — M5 Python version contradiction + ProjectContext + scan_project() |
+| 0.2.0 | 2026-06-05 | Phase 1 — M5 full + ProjectContext + scan_project() + CLI label/report/calibrate + CI/CD |
 | 0.1.0 | 2026-06-01 | Phase 0 baseline — M1~M4 + CLI scan |
 
 ---
