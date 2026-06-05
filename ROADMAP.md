@@ -6,7 +6,7 @@ Status: **Released**
 
 ### Features
 - ✅ M1~M4 baseline detectors (regex-based, zero LLM cost)
-- ✅ M5 full implementation (multi-file Python version contradiction)
+- ✅ M5 stub (multi-file analysis placeholder)
 - ✅ DetectionEngine with 2-pass architecture
 - ✅ CLI: `phantom-gate scan`
 - ✅ Pydantic data models (Finding, Evidence, Severity)
