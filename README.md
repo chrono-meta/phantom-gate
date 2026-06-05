@@ -96,9 +96,6 @@ phantom-gate scan input.txt --detectors M1,M2,M3
 
 # Filter by minimum severity (default: info)
 phantom-gate scan input.txt --severity high
-
-# Note: CLI currently supports scan command only.
-# Label/report/calibrate commands are planned for Phase 1.
 ```
 
 ### Exit Codes
