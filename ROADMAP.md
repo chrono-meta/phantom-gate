@@ -1,4 +1,4 @@
-# hallucinate Development Roadmap
+# phantom-gate Development Roadmap
 
 ## Phase 0 (v0.1.0 — Released 2026-06-01)
 
@@ -8,7 +8,7 @@ Status: **Released**
 - ✅ M1~M4 baseline detectors (regex-based, zero LLM cost)
 - ✅ M5 stub (multi-file analysis placeholder)
 - ✅ DetectionEngine with 2-pass architecture
-- ✅ CLI: `hallucinate scan`
+- ✅ CLI: `phantom-gate scan`
 - ✅ Pydantic data models (Finding, Evidence, Severity)
 - ✅ Rich console output
 
@@ -85,7 +85,7 @@ Status: **In Progress**
 ### Why M5 stub in v0.1?
 - **Transparent limitation**: README clearly states stub status
 - **Seed bank metaphor**: Users extend M5 in their domain
-- **External validation**: akaa1941 (forge-harness) confirmed stub is standard practice (2026-06-01)
+- **External validation**: forge-harness maintainer review confirmed stub is standard practice (2026-06-01)
 
 ### Why 2-pass architecture?
 - **Pass 1**: Independent detector execution (parallel-ready)

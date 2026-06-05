@@ -36,8 +36,8 @@ class BaseDetector(ABC):
     """Abstract base for all hallucination detectors
 
     Subclass this to create:
-    - PMH universal detectors (M1~M5)
-    - Domain-specific detectors (P-series for QASP, mobile patterns for mate, etc.)
+    - Universal detectors (M1~M5)
+    - Domain-specific detectors (your own, project-specific)
 
     Class Variables:
         scope: "file" (default) or "project". File detectors run per-file;

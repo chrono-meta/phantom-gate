@@ -23,7 +23,7 @@ def test_detection_context_get_line_out_of_bounds():
 # ── BaseDetector repr + enable/disable ───────────────────────────────────────
 
 def test_base_detector_repr(tmp_path):
-    from phantom_gate.detectors.pmh import M1
+    from phantom_gate.detectors.universal import M1
     d = M1()
     r = repr(d)
     assert "M1" in r
@@ -131,7 +131,7 @@ def test_load_project_missing_files_silently_skipped(tmp_path):
 def test_scan_project_meta_detector_applied(tmp_path):
     from phantom_gate.core.detector import MetaDetector, DetectionContext
     from phantom_gate.core.models import Verdict
-    from phantom_gate.detectors.pmh import M5
+    from phantom_gate.detectors.universal import M5
     from phantom_gate.pipeline.engine import DetectionEngine
 
     (tmp_path / "README.md").write_text("# Tool\n\nRequires Python 3.12+.\n")
@@ -152,7 +152,7 @@ def test_scan_project_meta_detector_applied(tmp_path):
 # ── M5 _extract fallback (no version found) ──────────────────────────────────
 
 def test_m5_extract_readme_no_version():
-    from phantom_gate.detectors.pmh import M5
+    from phantom_gate.detectors.universal import M5
     m5 = M5()
     ver, line_no = m5._extract_readme_version("# No version here\n\nJust text.\n")
     assert ver is None
@@ -160,7 +160,7 @@ def test_m5_extract_readme_no_version():
 
 
 def test_m5_extract_pyproject_no_version():
-    from phantom_gate.detectors.pmh import M5
+    from phantom_gate.detectors.universal import M5
     m5 = M5()
     ver, line_no = m5._extract_pyproject_version("[project]\nname = 'tool'\n")
     assert ver is None
@@ -170,7 +170,7 @@ def test_m5_extract_pyproject_no_version():
 # ── DetectionEngine.__repr__ ──────────────────────────────────────────────────
 
 def test_engine_repr():
-    from phantom_gate.detectors.pmh import M1, M2
+    from phantom_gate.detectors.universal import M1, M2
     from phantom_gate.pipeline.engine import DetectionEngine
     engine = DetectionEngine([M1(), M2()])
     r = repr(engine)

@@ -1,4 +1,4 @@
-"""hallucinate CLI — AI output hallucination detector."""
+"""phantom-gate CLI — AI output hallucination detector."""
 from __future__ import annotations
 
 import argparse
@@ -384,7 +384,7 @@ def cmd_calibrate(args: argparse.Namespace) -> int:
 
 def _load_detectors(spec: str):
     """Load detectors by comma-separated names or 'all'."""
-    from phantom_gate.detectors.pmh import M1, M2, M3, M4, M5
+    from phantom_gate.detectors.universal import M1, M2, M3, M4, M5
 
     available = {"M1": M1, "M2": M2, "M3": M3, "M4": M4, "M5": M5}
 

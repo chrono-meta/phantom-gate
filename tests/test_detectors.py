@@ -5,7 +5,7 @@ Uses independent fixtures (tests/conftest.py) to avoid AI circular validation.
 
 import pytest
 from phantom_gate.core.detector import DetectionContext
-from phantom_gate.detectors.pmh import M1, M2, M3, M4, M5
+from phantom_gate.detectors.universal import M1, M2, M3, M4, M5
 
 
 def test_m1_phantom_detection(sample_content):

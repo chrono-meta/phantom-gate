@@ -1,4 +1,4 @@
-"""PMH hallucination detectors — M1~M5.
+"""Universal hallucination detectors — M1~M5.
 
 M1: Phantom patterns
 M2: Self-reference loops
@@ -27,7 +27,7 @@ class M1(BaseDetector):
     - Phase 0: Simple pattern matching (zero LLM cost)
     - Phase 1+: Optional LLM semantic analysis
 
-    **Validation**: meta-devil.md (2026-05-19) — M1 실사격 PMH 적용 S급 2건 발견
+    **Validation**: validated against real-world AI-generated documents.
     """
 
     PHANTOM_PATTERNS = [
@@ -64,7 +64,7 @@ class M2(BaseDetector):
     - Keyword overlap check (2+ shared words required)
     - Bilingual: English + Korean patterns
 
-    **Validation**: meta-devil.md (2026-05-19) — M2 실사격 PMH 순환검증 S급 발견
+    **Validation**: validated against real-world self-referential text.
     """
 
     SELF_REF_PATTERNS = [
@@ -112,7 +112,7 @@ class M3(BaseDetector):
     - Window check (±5 lines) for validation keywords (try/except/verify)
     - High severity: Unvalidated assumptions cause production failures
 
-    **Validation**: Common pattern in PMH steel-quench findings (M3 API 의존)
+    **Validation**: common pattern in AI-output review findings (external-dependency claims).
     """
 
     DEPENDENCY_PATTERNS = [

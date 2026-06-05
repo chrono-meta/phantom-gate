@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 from phantom_gate import DetectionEngine
-from phantom_gate.detectors.pmh import M1, M2, M3, M4
+from phantom_gate.detectors.universal import M1, M2, M3, M4
 
 
 @pytest.fixture

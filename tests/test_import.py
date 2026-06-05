@@ -18,7 +18,7 @@ def test_import_engine():
 
 
 def test_import_pmh_detectors():
-    from phantom_gate.detectors.pmh import M1, M2, M3, M4, M5
+    from phantom_gate.detectors.universal import M1, M2, M3, M4, M5
     assert M1 is not None
     assert M2 is not None
     assert M3 is not None

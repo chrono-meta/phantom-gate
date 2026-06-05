@@ -1,4 +1,4 @@
-# hallucinate Design Document
+# phantom-gate Design Document
 
 **Version**: 0.1.0  
 **Last Updated**: 2026-06-01
@@ -54,22 +54,22 @@
 ### Closed-Loop Risk
 - **Phase 0**: Self-contained (no external ground truth)
 - **Accepted Risk**: Meta-detectors may hallucinate → mitigated by explicit rules (regex patterns)
-- **Phase 1+**: Integrate source-grounding-audit (PMH pattern) for ground truth validation
+- **Phase 1+**: Integrate source-grounding-audit for ground truth validation
 
 ---
 
 ## Detector Taxonomy
 
-### M-Series (Meta-patterns from PMH)
+### M-Series (universal meta-patterns)
 - **M1**: Phantom patterns (unfalsifiable claims)
 - **M2**: Self-reference loops (backward citation without prior mention)
 - **M3**: External dependency assumptions (unchecked API/LLM claims)
 - **M4**: Temporal inconsistency (date reversal)
 - **M5**: Cross-axis contradiction (multi-file analysis — Phase 1)
 
-### P-Series (Project-specific)
+### Domain Detectors (project-specific)
 - User-defined domain detectors
-- Example: QASP P1~P8 (PRD analysis, TC generation)
+- Define your own detectors for your project's needs
 
 ---
 
@@ -90,7 +90,7 @@ class Verdict(str, Enum):
 class ConflictResolver(MetaDetector):
     def review(self, findings: List[Finding], context: DetectionContext) -> List[Finding]:
         # If M1 + M2 both flag same line → ADJUST severity to HIGH
-        # If M1 flags but context.metadata["domain"] == "insurance" → REJECT
+        # If M1 flags but context.metadata["domain"] == "finance" → REJECT
         ...
 ```
 
@@ -129,7 +129,7 @@ class M5(BaseDetector):
 Pass 2 meta-detectors are self-referential (no external ground truth).
 
 ### Phase 1 Solution: source-grounding-audit
-PMH pattern (2026-05-25 실증):
+source-grounding-audit pattern:
 1. Extract claims (nouns, numbers, conditions) from Finding.message
 2. Trace back to source files (via context.source_path)
 3. Mark as "Phantom" if claim not in source
@@ -163,7 +163,7 @@ PMH pattern (2026-05-25 실증):
 
 ### Phase 1
 - **Independent fixtures**: Real-world docs (GitHub issue comments, StackOverflow)
-- **External validation**: akaa1941 (forge-harness) manual review
+- **External validation**: forge-harness maintainer manual review
 - **Coverage**: 90%+ target
 
 ---
@@ -177,7 +177,7 @@ PMH pattern (2026-05-25 실증):
 | **TruLens** | RAG groundedness | Feedback functions | Pass 2 meta-detectors |
 | **DeepEval** | Unit testing | G-Eval + claims | M1~M4 = test assertions |
 
-**hallucinate positioning**: Lightweight, pip-installable, domain-extensible baseline
+**phantom-gate positioning**: Lightweight, pip-installable, domain-extensible baseline
 
 ### Why not just use X?
 
@@ -185,22 +185,22 @@ PMH pattern (2026-05-25 실증):
 A: Yes, technically. But:
 - Each validator = separate class boilerplate (`@register_validator`, validation schema, error messages)
 - M1~M4 would require 4 validator classes + registry setup (~150 lines)
-- hallucinate: 4 detectors already implemented, single `pip install`
+- phantom-gate: 4 detectors already implemented, single `pip install`
 
 **Q: "Can't LangCheck metrics replace M1~M4?"**  
 A: Partially:
 - LangCheck focuses on semantic metrics (factual consistency, toxicity) — M1 phantom patterns are regex, not semantic
 - No built-in "self-reference loop" detector (M2)
-- Metric scores (0.0~1.0) require threshold tuning — hallucinate = binary detection
+- Metric scores (0.0~1.0) require threshold tuning — phantom-gate = binary detection
 
 **Q: "Can't I combine TruLens + DeepEval?"**  
 A: Composition overhead:
 - TruLens = RAG feedback functions (requires RAG architecture)
 - DeepEval = test assertions (requires pytest integration)
 - Combining both for M1~M5 = 2 dependency trees + integration glue
-- hallucinate: zero LLM cost, stdlib-only core (Phase 0)
+- phantom-gate: zero LLM cost, stdlib-only core (Phase 0)
 
-**Bottom line**: You *can* replicate M1~M5 with existing tools. hallucinate is for when you want those patterns in 1 `pip install` without boilerplate.
+**Bottom line**: You *can* replicate M1~M5 with existing tools. phantom-gate is for when you want those patterns in 1 `pip install` without boilerplate.
 
 ---
 
@@ -209,7 +209,7 @@ A: Composition overhead:
 ### Why BaseDetector abstract class?
 - Enforces `detect(context) -> List[Finding]` contract
 - `is_enabled()` / `enable()` / `disable()` for runtime control
-- Easy subclassing for P-series domain detectors
+- Easy subclassing for domain-specific detectors
 
 ### Why DetectionContext dataclass?
 - Single object passed to all detectors
@@ -230,17 +230,13 @@ A: Composition overhead:
 - Guardrails validators: [guardrails-ai/guardrails](https://github.com/guardrails-ai/guardrails)
 - LangCheck metrics: [citadel-ai/langcheck](https://github.com/citadel-ai/langcheck)
 
-### Internal Evidence
-- meta-devil.md (2026-05-19): M1/M2 실사격 PMH 적용 결과
-- steel-quench Wave 1 (2026-06-01): hallucinate 자체 검증 15건 발견
-
 ---
 
 ## Future Directions
 
 ### Phase 2+
 - **Multi-language**: Korean regex patterns (M1 "항상", M2 "위에서 언급한")
-- **Domain packs**: `hallucinate.detectors.finance`, `.healthcare`, `.legal`
+- **Domain packs**: `phantom_gate.detectors.finance`, `.healthcare`, `.legal`
 - **Web UI**: Batch scan interface (Streamlit or Gradio)
 - **Academic**: Publish hallucination taxonomy paper
 
@@ -260,12 +256,12 @@ Verdict design influenced by TruLens feedback functions:
 feedback = Feedback(groundedness_provider.groundedness_measure)
 result = feedback(output=llm_output)  # 0.0~1.0 score
 
-# hallucinate analogy
+# phantom-gate analogy
 verdict = meta_detector.review(findings, context)  # Verdict enum
 ```
 
 **Key difference**:
 - TruLens: Continuous score (0.0~1.0)
-- hallucinate: Discrete verdict (ACCEPT/REJECT/ADJUST/DEFER)
+- phantom-gate: Discrete verdict (ACCEPT/REJECT/ADJUST/DEFER)
 
 **Rationale**: Discrete verdicts map cleanly to CI/CD pass/fail gates.

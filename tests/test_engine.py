@@ -9,7 +9,7 @@ from phantom_gate.core.detector import (
 )
 from phantom_gate.core.models import Finding, Severity, Evidence, Verdict
 from phantom_gate.pipeline.engine import DetectionEngine
-from phantom_gate.detectors.pmh import M1, M2
+from phantom_gate.detectors.universal import M1, M2
 
 
 class MockDetector(BaseDetector):
@@ -213,7 +213,7 @@ def test_engine_multiple_meta_detectors():
 
 def test_scan_project_detects_version_contradiction(tmp_path):
     """scan_project() runs M5 on a project directory and finds version mismatch"""
-    from phantom_gate.detectors.pmh import M5
+    from phantom_gate.detectors.universal import M5
 
     (tmp_path / "README.md").write_text("# Tool\n\nRequires Python 3.12+.\n")
     (tmp_path / "pyproject.toml").write_text(
@@ -230,7 +230,7 @@ def test_scan_project_detects_version_contradiction(tmp_path):
 
 def test_scan_project_no_false_positive_consistent(tmp_path):
     """scan_project() produces no M5 finding when versions match"""
-    from phantom_gate.detectors.pmh import M5
+    from phantom_gate.detectors.universal import M5
 
     (tmp_path / "README.md").write_text("# Tool\n\nRequires Python 3.10+.\n")
     (tmp_path / "pyproject.toml").write_text(
@@ -262,7 +262,7 @@ def test_scan_project_file_detectors_run_per_file(tmp_path):
 
 def test_scan_project_m5_runs_once(tmp_path):
     """M5 (project-scoped) runs exactly once even with multiple files"""
-    from phantom_gate.detectors.pmh import M5
+    from phantom_gate.detectors.universal import M5
 
     (tmp_path / "README.md").write_text("# Tool\n\nRequires Python 3.12+.\n")
     (tmp_path / "pyproject.toml").write_text(

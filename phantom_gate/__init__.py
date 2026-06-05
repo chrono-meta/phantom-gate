@@ -1,6 +1,6 @@
-"""hallucinate - Universal AI output hallucination detection library
+"""phantom-gate - Universal AI output hallucination detection library
 
-PMH (Pay-Meta-Harness) seed bank for rapid structuring + momentum injection.
+Universal meta-harness seed bank for rapid structuring + momentum injection.
 """
 
 __version__ = "0.2.0"

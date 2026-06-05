@@ -1,7 +1,7 @@
 """phantom-gate detector registry.
 
 Built-in detectors (universal):
-    from phantom_gate.detectors.pmh import M1, M2, M3, M4, M5
+    from phantom_gate.detectors.universal import M1, M2, M3, M4, M5
 
 Domain-specific detectors live in each project (B-pattern):
     # In your project:

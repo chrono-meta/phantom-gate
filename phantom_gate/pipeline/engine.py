@@ -76,7 +76,7 @@ class DetectionEngine:
 
     Example:
         >>> from phantom_gate import DetectionEngine
-        >>> from phantom_gate.detectors.pmh import M1, M2
+        >>> from phantom_gate.detectors.universal import M1, M2
         >>> engine = DetectionEngine([M1(), M2()])
         >>> findings = engine.scan("AI output text...")
     """
